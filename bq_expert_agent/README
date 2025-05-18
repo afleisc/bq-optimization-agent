@@ -1,5 +1,0 @@
-pip install toolbox-langchain langchain
-pip install google-adk
-
-./toolbox --tools-file "tools.yaml"
-adk web
