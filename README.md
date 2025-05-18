@@ -1,49 +1,20 @@
 # BQ Optimization Agent
 
-## Packages required
-```
-pip install toolbox-langchain langchain
-pip install google-adk
-```
+You need an existing Google Cloud account and a project.
+1. Set up a Google Cloud project
+2. Set up the gcloud CLI
+3. Authenticate to Google Cloud, from the terminal by running `gcloud auth login`.
+4. Enable the [Vertex AI API](https://console.cloud.google.com/flows/enableapi?apiid=aiplatform.googleapis.com).
 
-## Setup ADK
-`nano .env`
+## Setup
+1. `pip install uv`
+2. `chmod +x setup_and_run.sh`
+3. `./setup_and_run.sh`
 
-Paste the following and replace the variables with your own values:
-```
-GOOGLE_GENAI_USE_VERTEXAI=TRUE
-GOOGLE_CLOUD_PROJECT=YOUR_PROJECT_ID
-GOOGLE_CLOUD_LOCATION=LOCATION
-```
+It will prompt you for your GOOGLE_CLOUD_PROJECT and GOOGLE_CLOUD_LOCATION if the .env file doesn't exist.
 
-## Download toolbox
-```
-export VERSION=0.5.0
-
-curl -O https://storage.googleapis.com/genai-toolbox/v$VERSION/linux/amd64/toolbox
-
-chmod +x toolbox
-```
-
-## Run the Agent
-
-### Run the Toolbox
-```
-./toolbox --tools-file "tools.yaml"
-```
-open a new terminal
-
-### Run the Antipattern tool
-```
-git clone https://github.com/afleisc/bigquery-antipattern-recognition.git
-cd bigquery-antipattern-recognition
-mvn org.springframework.boot:spring-boot-maven-plugin:run
-
-```
-open a new terminal
-
-### Run the ADK
-```
-adk web
-```
+👉 Next Steps (Run these in separate terminals):
+   1. Terminal 1 (Toolbox): `./toolbox --tools-file \"tools.yaml\"`
+   2. Terminal 2 (Antipattern Tool): `cd bigquery-antipattern-recognition && mvn org.springframework.boot:spring-boot-maven-plugin:run`
+   3. Terminal 3 (ADK): `adk web`
 

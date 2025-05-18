@@ -6,6 +6,9 @@ __pycache__/
 # Toolbox
 toolbox
 
+# Antipattern tool
+bigquery-antipattern-recognition
+
 # C extensions
 *.so
 

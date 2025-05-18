@@ -1,0 +1,9 @@
+[project]
+name = "bq-optimization-agent"
+version = "0.1.0"
+dependencies = [
+    "toolbox-langchain",
+    "langchain",
+    "google-adk"
+]
+requires-python = ">=3.8" # Specify your desired Python version
