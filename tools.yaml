@@ -1,8 +1,8 @@
 sources:
   my-bigquery-source:
     kind: bigquery
-    project: dannydeleo
-    location: us
+    project: 
+    location: 
 tools:
   get-top-query-hashes:
     kind: bigquery-sql
