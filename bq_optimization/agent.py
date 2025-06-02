@@ -19,12 +19,14 @@
 """
 import os
 from datetime import date
-
+import google.auth
 from google.genai import types
 
 from google.adk.agents import Agent
 from google.adk.agents.callback_context import CallbackContext
 from google.adk.tools import load_artifacts
+from google.adk.tools.bigquery import BigQueryCredentialsConfig
+from google.adk.tools.bigquery import BigQueryToolset
 
 from .sub_agents.bigquery.tools import (
     get_database_settings as get_bq_database_settings,
@@ -32,7 +34,25 @@ from .sub_agents.bigquery.tools import (
 from .prompts import return_instructions_root
 from .tools import call_db_agent, call_ds_agent
 
+
 date_today = date.today()
+
+RUN_WITH_ADC = True
+
+
+if RUN_WITH_ADC:
+
+  application_default_credentials, _ = google.auth.default()
+
+  credentials_config = BigQueryCredentialsConfig(
+
+      credentials=application_default_credentials
+
+  )
+
+bigquery_toolset = BigQueryToolset(credentials_config=credentials_config)
+
+
 
 
 def setup_before_agent_call(callback_context: CallbackContext):
@@ -74,6 +94,7 @@ root_agent = Agent(
         call_db_agent,
         call_ds_agent,
         load_artifacts,
+        bigquery_toolset
     ],
     before_agent_callback=setup_before_agent_call,
     generate_content_config=types.GenerateContentConfig(temperature=0.01),

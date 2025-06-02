@@ -19,7 +19,7 @@ import logging
 import os
 import re
 
-from data_science.utils.utils import get_env_var
+from bq_optimization.utils.utils import get_env_var
 from google.adk.tools import ToolContext
 from google.cloud import bigquery
 from google.genai import Client

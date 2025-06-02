@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "data-science"
+name = "bq-optimization"
 version = "0.1"
 description = "Data Science and Data QnA Multi-Agent"
 authors = ["Meltem Subasioglu <msubasioglu@google.com>"]
@@ -11,7 +11,7 @@ package-mode = true
 [tool.poetry.dependencies]
 python = "^3.12"
 python-dotenv = "^1.0.1"
-google-adk = "^0.5.0"
+google-adk = "^1.1.1"
 immutabledict = "^4.2.1"
 sqlglot = "^26.10.1"
 db-dtypes = "^1.4.2"
