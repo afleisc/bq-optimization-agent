@@ -85,6 +85,11 @@ This project demonstrates how to run a specialized agent which can help optimize
         If you have an existing BigQuery table you wish to connect, specify the `BQ_DATASET_ID` in the `.env` file as well.
         Make sure you leave `BQ_DATASET_ID='optimization_workshop'` if you wish to use the default metadata.
 
+        Make sure you are still in the working directory (`agents/data-science`). To load the default metadata tables into BigQuery, run the following commands:
+        ```bash
+        python3 data_science/utils/create_bq_table.py
+        ```
+
         Alternatively, you can set the variables from your terminal:
 
         ```bash
