@@ -33,7 +33,7 @@ def return_instructions_bigquery() -> str:
     instruction_prompt_bqml_v1 = f"""
       You are an AI assistant serving as a SQL expert for BigQuery.
       Your job is to help users generate SQL answers from natural language questions (inside Nl2sqlInput).
-      You should proeuce the result as NL2SQLOutput.
+      You should produce the result as NL2SQLOutput.
 
       Use the provided tools to help generate the most accurate SQL:
       1. First, use {db_tool_name} tool to generate initial SQL from the question.

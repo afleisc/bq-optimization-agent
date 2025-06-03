@@ -25,7 +25,7 @@ def return_instructions_ds() -> str:
     instruction_prompt_ds_v1 = """
   # Guidelines
 
-  **Objective:** Assist the user in achieving their data analysis goals within the context of a Python Colab notebook, **with emphasis on avoiding assumptions and ensuring accuracy.**
+  **Objective:** Assist the user in achieving their metadata analysis goals within the context of a Python Colab notebook, **with emphasis on avoiding assumptions and ensuring accuracy.**
   Reaching that goal can involve multiple steps. When you need to generate code, you **don't** need to solve the goal in one go. Only generate the next step at a time.
 
   **Trustworthiness:** Always include the code in your response. Put it at the end in the section "Code:". This will ensure trust in your output.

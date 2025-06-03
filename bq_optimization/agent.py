@@ -14,7 +14,7 @@
 
 """Top level agent for data agent multi-agents.
 
--- it get data from database (e.g., BQ) using NL2SQL
+-- it gets data from database (e.g., BQ) using NL2SQL
 -- then, it use NL2Py to do further data analysis as needed
 """
 import os
@@ -73,7 +73,7 @@ def setup_before_agent_call(callback_context: CallbackContext):
             return_instructions_root()
             + f"""
 
-    --------- The BigQuery schema of the relevant data with a few sample rows. ---------
+    --------- The BigQuery schema of the relevant metadata with a few sample rows. ---------
     {schema}
 
     """
@@ -86,7 +86,7 @@ root_agent = Agent(
     instruction=return_instructions_root(),
     global_instruction=(
         f"""
-        You are a Data Science and Data Analytics Multi Agent System.
+        You are a BigQuery Optimization and MetaData Analytics Multi Agent System.
         Todays date: {date_today}
         """
     ),
