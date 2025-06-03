@@ -21,7 +21,7 @@
 from google.adk.tools import ToolContext
 from google.adk.tools.agent_tool import AgentTool
 
-from .sub_agents import ds_agent, db_agent
+from .sub_agents import ds_agent, db_agent, query_agent
 
 
 async def call_db_agent(
@@ -57,7 +57,7 @@ async def call_ds_agent(
     question_with_data = f"""
   Question to answer: {question}
 
-  Actual data to analyze prevoius quesiton is already in the following:
+  Actual data to analyze previous question is already in the following:
   {input_data}
 
   """
@@ -69,3 +69,30 @@ async def call_ds_agent(
     )
     tool_context.state["ds_agent_output"] = ds_agent_output
     return ds_agent_output
+
+async def call_qy_agent(
+    question: str,
+    tool_context: ToolContext,
+):
+    """Tool to call query optimization agent."""
+
+    if question == "N/A":
+        return tool_context.state["db_agent_output"]
+
+    input_data = tool_context.state["query_result"]
+
+    question_with_data = f"""
+  Question to answer: {question}
+
+  Query text and referenced tables are ideally in the following::
+  {input_data}
+
+  """
+
+    agent_tool = AgentTool(agent=query_agent)
+
+    query_agent_output = await agent_tool.run_async(
+        args={"request": question_with_data}, tool_context=tool_context
+    )
+    tool_context.state["query_agent_output"] = query_agent_output
+    return query_agent_output

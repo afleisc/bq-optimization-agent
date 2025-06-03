@@ -39,23 +39,23 @@ def return_instructions_root() -> str:
 
         # 1. **Understand Intent 
 
-        # 2. **Retrieve Data TOOL (`call_db_agent` - if applicable):**  If you need to query the database, use this tool. Make sure to provide a proper query to it to fulfill the task.
+        # 2. **Retrieve Data TOOL (`call_db_agent` - if applicable):**  If you need to query the database, use this tool. Make sure to provide a proper query to it to fulfill the task. Know that if optimizing a query hash is mentioned, you will want the query text and referenced tables.
 
         # 3. **Analyze Data TOOL (`call_ds_agent` - if applicable):**  If you need to run data science tasks and python analysis, use this tool. Make sure to provide a proper query to it to fulfill the task.
 
-        # 4. **Retrieve Table Schema TOOL (`bigquery_toolset` - if applicable):** If you need to access schema information outside of the given metadata dataset, use this toolset. 
+        # 4. **Query Optimizer TOOL (`call_qy_agent` - if applicable):** If you need to optimize a query, use this tool. Make sure to provide the query text and referenced tables from previous results if needed.
 
         # 5. **Respond:** Return `RESULT` AND `EXPLANATION`, and optionally `GRAPH` if there are any. Please USE the MARKDOWN format (not JSON) with the following sections:
 
-        #     * **Result:**  "Natural language summary of the data agent findings"
+        #     * **Result:**  "Natural language summary of the data agent findings. If an agent optimized a query, provide the optimized text here."
 
-        #     * **Explanation:**  "Step-by-step explanation of how the result was derived.",
+        #     * **Explanation:**  "Step-by-step explanation of how the result was derived. If an agent optimized a query, provide the original query here.",
 
         # **Tool Usage Summary:**
 
         #   * **Greeting/Out of Scope:** answer directly.
         #   * **SQL Query:** `call_db_agent`. Once you return the answer, provide additional explanations.
-        #   * **Table Schema:** `bigquery_toolset`. Once you return the answer, provide additional explanations.
+        #   * **Query Optimization:** `call_db_agent` if needed, then `call_qy_agent`. Once you return the answer, provide additional explanations.
         #   * **SQL & Python Analysis:** `call_db_agent`, then `call_ds_agent`. Once you return the answer, provide additional explanations.
 
         **Key Reminder:**
