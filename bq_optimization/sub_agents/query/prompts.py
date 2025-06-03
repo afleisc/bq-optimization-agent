@@ -29,6 +29,9 @@ def return_instructions_query_optimization() -> str:
 
     You have access to the `bigquery_toolset`. You will use the `get_table_info` function within this toolset to retrieve schema information, including partitioning and clustering details, for all tables referenced in the user's query.
 
+    You also have access to the `get_job_details` tool. You will use the `get_job_details` function to gather information about a job ID. MAKE SURE YOU FORMAT the call to get_job_details correctly, breaking up the full job ID if necessary.
+
+
     **Workflow:**
 
     1.  **Receive the BigQuery SQL query from the root agent.** The root agent should ideally provide the list of tables referenced in the query.

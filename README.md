@@ -22,8 +22,6 @@ This project demonstrates how to run a specialized agent which can help optimize
 *   **Poetry:** Install Poetry by following the instructions on the official Poetry website: [https://python-poetry.org/docs/](https://python-poetry.org/docs/)
 *   **Git:** Ensure you have git installed. If not, you can download it from [https://git-scm.com/](https://git-scm.com/) and follow the [installation guide](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git).
 
-
-
 ### Project Setup with Poetry
 
 1.  **Clone the Repository:**

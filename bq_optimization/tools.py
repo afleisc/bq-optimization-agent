@@ -74,25 +74,26 @@ async def call_qy_agent(
     question: str,
     tool_context: ToolContext,
 ):
-    """Tool to call query optimization agent."""
+    """
+    Tool to call the query optimization agent. This function acts as a direct
+    pass-through to the specialist query_agent.
+    """
+    # The `question` here is the user's raw request, such as:
+    # "Please analyze job 8e0e63fc-3e75-4d0d-ba71-e9e0fecad2e6"
+    # or "How can I optimize this query: SELECT * FROM my_table".
 
-    if question == "N/A":
-        return tool_context.state["db_agent_output"]
+    # We directly pass the request to the expert agent.
+    # The query_agent itself will use its LLM and tools (like get_job_details)
+    # to understand the request and generate a response.
+    # This removes the dependency on db_agent_output.
 
-    input_data = tool_context.state["query_result"]
-
-    question_with_data = f"""
-  Question to answer: {question}
-
-  Query text and referenced tables are ideally in the following::
-  {input_data}
-
-  """
-
+    print(f"\nCalling Query Optimization agent with request: {question}")
     agent_tool = AgentTool(agent=query_agent)
 
     query_agent_output = await agent_tool.run_async(
-        args={"request": question_with_data}, tool_context=tool_context
+        # Pass the original question directly to the sub-agent.
+        args={"request": question},
+        tool_context=tool_context
     )
     tool_context.state["query_agent_output"] = query_agent_output
     return query_agent_output

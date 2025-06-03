@@ -2,7 +2,7 @@
 name = "bq-optimization"
 version = "0.1"
 description = "Data Science and Data QnA Multi-Agent"
-authors = ["Meltem Subasioglu <msubasioglu@google.com>"]
+authors = ["Andrew Fleischer <afleisc@google.com>"]
 license = "Apache License 2.0"
 readme = "README.md"
 package-mode = true

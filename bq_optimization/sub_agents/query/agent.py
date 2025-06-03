@@ -20,6 +20,8 @@ from google.adk.tools.bigquery import BigQueryToolset
 import google.auth
 
 from .prompts import return_instructions_query_optimization
+from . import tools
+
 
 RUN_WITH_ADC = True
 
@@ -40,5 +42,5 @@ query_agent = Agent(
     model=os.getenv("QUERY_AGENT_MODEL"),
     name="query_optimizer_agent",
     instruction=return_instructions_query_optimization(),
-    tools=[bigquery_toolset],
+    tools=[bigquery_toolset, tools.get_job_details],
 )
