@@ -23,5 +23,5 @@ query_agent = Agent(
     model=os.getenv("QUERY_AGENT_MODEL"),
     name="query_optimizer_agent",
     instruction=return_instructions_query_optimization(),
-    tools=[tools.get_table_info, tools.get_job_details],
+    tools=[tools.get_table_info, tools.get_job_details, tools.produce_report],
 )

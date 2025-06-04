@@ -17,6 +17,8 @@
 from collections import defaultdict
 
 from google.adk.tools import ToolContext
+from google.adk.artifacts import InMemoryArtifactService # Or GcsArtifactService
+from google.genai import types
 from google.cloud import bigquery
 from google.cloud.bigquery.table import TableReference
 
@@ -201,3 +203,11 @@ def get_table_info(
         "status": "ERROR",
         "error_details": str(ex),
     }
+
+async def produce_report(html_content: str, tool_context: ToolContext = None):
+    filename = "report.html"
+    await tool_context.save_artifact(
+        filename,
+        types.Part.from_bytes(data=html_content.encode("utf-8"), mime_type="text/html"),
+    )
+    return {"status": "ok", "filename": filename}
