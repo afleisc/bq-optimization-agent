@@ -29,7 +29,7 @@ def return_instructions_query_optimization() -> str:
 
     **Available Tools:**
     1.  `get_job_details(job_id: str, project_id: str, location: str)`: Use this tool when the user provides a BigQuery job ID. It returns the original query text, referenced tables, and other vital statistics.
-    2.  `bigquery_toolset.get_table_info(table_name: str)`: Use this tool to get the schema, partitioning, and clustering information for a specific table.
+    2.  `get_table_info(table_name: str)`: Use this tool to get the schema, partitioning, and clustering information for a specific table.
 
     ---
     ### Input Handling and Workflow

@@ -15,32 +15,13 @@
 """Query Optimization Agent: Expert Agent to identify antipatterns and provide suggestions"""
 import os
 from google.adk.agents import Agent
-from google.adk.tools.bigquery import BigQueryCredentialsConfig
-from google.adk.tools.bigquery import BigQueryToolset
-import google.auth
 
 from .prompts import return_instructions_query_optimization
 from . import tools
-
-
-RUN_WITH_ADC = True
-
-
-if RUN_WITH_ADC:
-
-  application_default_credentials, _ = google.auth.default()
-
-  credentials_config = BigQueryCredentialsConfig(
-
-      credentials=application_default_credentials
-
-  )
-
-bigquery_toolset = BigQueryToolset(credentials_config=credentials_config)
 
 query_agent = Agent(
     model=os.getenv("QUERY_AGENT_MODEL"),
     name="query_optimizer_agent",
     instruction=return_instructions_query_optimization(),
-    tools=[bigquery_toolset, tools.get_job_details],
+    tools=[tools.get_table_info, tools.get_job_details],
 )

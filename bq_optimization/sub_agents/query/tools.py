@@ -104,3 +104,100 @@ def get_job_details(
 
     # Join all the collected lines into a single string and return it.
     return "\n".join(output_lines)
+
+
+def get_table_info(
+    project_id: str, dataset_id: str, table_id: str
+) -> dict:
+  """Get metadata information about a BigQuery table.
+
+  Args:
+      project_id (str): The Google Cloud project id containing the dataset.
+      dataset_id (str): The BigQuery dataset id containing the table.
+      table_id (str): The BigQuery table id.
+      credentials (Credentials): The credentials to use for the request.
+
+  Returns:
+      dict: Dictionary representing the properties of the table.
+
+  Examples:
+      >>> get_table_info("bigquery-public-data", "ml_datasets", "penguins")
+      {
+        "kind": "bigquery#table",
+        "etag": "X0ZkRohSGoYvWemRYEgOHA==",
+        "id": "bigquery-public-data:ml_datasets.penguins",
+        "selfLink":
+        "https://bigquery.googleapis.com/bigquery/v2/projects/bigquery-public-data/datasets/ml_datasets/tables/penguins",
+        "tableReference": {
+            "projectId": "bigquery-public-data",
+            "datasetId": "ml_datasets",
+            "tableId": "penguins"
+        },
+        "schema": {
+            "fields": [
+                {
+                    "name": "species",
+                    "type": "STRING",
+                    "mode": "REQUIRED"
+                },
+                {
+                    "name": "island",
+                    "type": "STRING",
+                    "mode": "NULLABLE"
+                },
+                {
+                    "name": "culmen_length_mm",
+                    "type": "FLOAT",
+                    "mode": "NULLABLE"
+                },
+                {
+                    "name": "culmen_depth_mm",
+                    "type": "FLOAT",
+                    "mode": "NULLABLE"
+                },
+                {
+                    "name": "flipper_length_mm",
+                    "type": "FLOAT",
+                    "mode": "NULLABLE"
+                },
+                {
+                    "name": "body_mass_g",
+                    "type": "FLOAT",
+                    "mode": "NULLABLE"
+                },
+                {
+                    "name": "sex",
+                    "type": "STRING",
+                    "mode": "NULLABLE"
+                }
+            ]
+        },
+        "numBytes": "28947",
+        "numLongTermBytes": "28947",
+        "numRows": "344",
+        "creationTime": "1619804743188",
+        "lastModifiedTime": "1634584675234",
+        "type": "TABLE",
+        "location": "US",
+        "numTimeTravelPhysicalBytes": "0",
+        "numTotalLogicalBytes": "28947",
+        "numActiveLogicalBytes": "0",
+        "numLongTermLogicalBytes": "28947",
+        "numTotalPhysicalBytes": "5350",
+        "numActivePhysicalBytes": "0",
+        "numLongTermPhysicalBytes": "5350",
+        "numCurrentPhysicalBytes": "5350"
+      }
+  """
+  try:
+    bq_client = get_bq_client(project_id)
+    return bq_client.get_table(
+        bigquery.TableReference(
+            bigquery.DatasetReference(project_id, dataset_id), table_id
+        )
+    ).to_api_repr()
+  except Exception as ex:
+    return {
+        "status": "ERROR",
+        "error_details": str(ex),
+    }
